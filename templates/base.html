@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Misión Eco-Reto{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <script src="{{ url_for('static', filename='js/validacion.js') }}" defer></script>
+</head>
+<body>
+    {% if session.get('usuario_id') %}
+    <div class="app">
+        <aside class="sidebar">
+            <a class="logo" href="{{ url_for('rutas.inicio') }}">
+                Misión <span>🌿</span><br>Eco-Reto
+            </a>
+
+            <nav>
+                <a href="{{ url_for('rutas.inicio') }}">⌂ Inicio</a>
+                <a href="{{ url_for('rutas.inicio') }}#acciones">▣ Mis acciones</a>
+                <a href="{{ url_for('rutas.nueva') }}">＋ Nueva acción</a>
+                <a href="{{ url_for('rutas.inicio') }}#estadisticas">▥ Estadísticas</a>
+                <a href="{{ url_for('rutas.salir') }}">↪️ Cerrar sesión</a>
+            </nav>
+        </aside>
+
+        <main class="contenido">
+            <header class="topbar">
+                <span>Pequeñas acciones, grandes cambios 🌎</span>
+                <span>👤 Hola, {{ session.get('usuario') }}</span>
+            </header>
+
+            <div class="mensajes">
+                {% for categoria, mensaje in get_flashed_messages(with_categories=true) %}
+                    <div class="mensaje {{ categoria }}">{{ mensaje }}</div>
+                {% endfor %}
+            </div>
+
+            {% block contenido %}{% endblock %}
+        </main>
+    </div>
+    {% else %}
+        <div class="mensajes">
+            {% for categoria, mensaje in get_flashed_messages(with_categories=true) %}
+                <div class="mensaje {{ categoria }}">{{ mensaje }}</div>
+            {% endfor %}
+        </div>
+        {% block acceso %}{% endblock %}
+    {% endif %}
+</body>
+</html>

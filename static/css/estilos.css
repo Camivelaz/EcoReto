@@ -1,0 +1,548 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #173b35;
+    background: #f3f7f5;
+}
+
+a {
+    color: #087b5c;
+    text-decoration: none;
+}
+
+h1, h2, p {
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 26px;
+}
+
+p {
+    line-height: 1.5;
+    color: #61736d;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 235px;
+    flex-shrink: 0;
+    background: #064e43;
+    color: white;
+    padding: 25px 16px;
+}
+
+.logo {
+    display: block;
+    color: #eaff9b;
+    font-size: 27px;
+    font-weight: bold;
+    line-height: 1.15;
+    margin: 0 0 35px 8px;
+}
+
+.logo span {
+    color: #a4e76d;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.sidebar nav a {
+    color: white;
+    padding: 13px 12px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.sidebar nav a:hover {
+    background: #087c61;
+}
+
+.contenido {
+    flex: 1;
+    min-width: 0;
+}
+
+.topbar {
+    background: white;
+    padding: 19px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #e1e9e5;
+    font-size: 14px;
+}
+
+.bienvenida {
+    padding: 30px 28px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.bienvenida h1 {
+    margin-bottom: 8px;
+}
+
+.bienvenida p {
+    margin-bottom: 0;
+}
+
+.boton {
+    border: none;
+    border-radius: 7px;
+    padding: 11px 14px;
+    display: inline-block;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.principal {
+    background: #087b5c;
+    color: white;
+}
+
+.principal:hover {
+    background: #065d47;
+}
+
+.estadisticas {
+    padding: 12px 28px 28px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 14px;
+    border-radius: 12px;
+    min-width: 0;
+}
+
+.stat > span {
+    font-size: 30px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 25px;
+    color: #173b35;
+    overflow-wrap: anywhere;
+}
+
+.stat small {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #405b53;
+}
+
+.verde {
+    background: #d9f5df;
+}
+
+.azul {
+    background: #dceeff;
+}
+
+.amarillo {
+    background: #fff0c9;
+}
+
+.rosa {
+    background: #f9e0f0;
+}
+
+.tabla-seccion {
+    background: white;
+    margin: 0 28px 30px;
+    padding: 22px;
+    border-radius: 12px;
+    border: 1px solid #e1e9e5;
+}
+
+.tabla-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.tabla-titulo h2 {
+    font-size: 21px;
+    margin-bottom: 0;
+}
+
+#buscarAccion {
+    width: 230px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd8d2;
+    border-radius: 7px;
+    font: inherit;
+    font-size: 14px;
+    background: white;
+    color: #263e37;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: 2px solid #8cd7b6;
+    border-color: #087b5c;
+}
+
+.tabla-contenedor {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+th, td {
+    text-align: left;
+    padding: 13px 10px;
+    border-bottom: 1px solid #e4ebe7;
+}
+
+th {
+    background: #f0f5f2;
+    color: #31544a;
+}
+
+.etiqueta {
+    background: #d6f5e4;
+    color: #08744e;
+    border-radius: 20px;
+    padding: 5px 9px;
+    white-space: nowrap;
+}
+
+.botones-tabla {
+    min-width: 230px;
+}
+
+.botones-tabla .boton {
+    margin: 2px;
+}
+
+.editar {
+    background: #1976c9;
+    color: white;
+}
+
+.ver {
+    background: #e3f2fd;
+    color: #12558b;
+}
+
+.eliminar {
+    background: #d93649;
+    color: white;
+}
+
+.cancelar {
+    background: #e9eeeb;
+    color: #344b42;
+}
+
+.form-eliminar {
+    display: inline;
+}
+
+.vacio {
+    text-align: center;
+    padding: 30px;
+    color: #75867f;
+}
+
+.nota {
+    font-size: 12px;
+    margin-top: 18px;
+}
+
+.formulario-contenedor {
+    padding: 35px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.formulario-card {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border: 1px solid #e0e9e3;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 5px 20px #174d3710;
+}
+
+.formulario-encabezado {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.formulario-encabezado h1 {
+    margin-bottom: 7px;
+}
+
+.formulario-encabezado p {
+    margin-bottom: 0;
+}
+
+.icono-grande {
+    font-size: 38px;
+}
+
+.formulario-card label,
+.login-card label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 17px 0 8px;
+}
+
+.formulario-card textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-botones {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.detalle-dato {
+    padding: 16px 0;
+    border-bottom: 1px solid #e5ece8;
+}
+
+.detalle-dato span {
+    display: block;
+    font-size: 13px;
+    color: #72847b;
+    margin-bottom: 7px;
+}
+
+.detalle-dato strong {
+    overflow-wrap: anywhere;
+}
+
+.login-page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 35px;
+    padding: 45px;
+    background: linear-gradient(135deg, #d9f5e3, #f5fbf6);
+}
+
+.login-ilustracion {
+    text-align: center;
+    padding: 35px 15px;
+}
+
+.planeta {
+    font-size: 110px;
+}
+
+.login-ilustracion h1 {
+    font-size: 48px;
+    color: #087b5c;
+    margin: 10px 0;
+}
+
+.login-ilustracion p {
+    font-size: 19px;
+}
+
+.naturaleza {
+    font-size: 38px;
+    margin-top: 25px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    justify-self: center;
+    background: white;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 10px 35px #174d3715;
+}
+
+.login-card h2 {
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+.login-card form {
+    margin-top: 25px;
+}
+
+.login-card input {
+    margin-bottom: 8px;
+}
+
+.ancho {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+}
+
+.mensajes {
+    padding: 0 20px;
+}
+
+.mensaje {
+    margin: 12px auto;
+    padding: 12px 16px;
+    border-radius: 7px;
+    max-width: 900px;
+}
+
+.ok {
+    background: #d8f5e3;
+    color: #145b39;
+}
+
+.error {
+    background: #ffe1e1;
+    color: #9b2020;
+}
+
+@media (max-width: 1000px) {
+    .estadisticas {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .sidebar {
+        width: 190px;
+    }
+}
+
+@media (max-width: 700px) {
+    .app {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .logo {
+        font-size: 23px;
+        margin-bottom: 18px;
+    }
+
+    .sidebar nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .sidebar nav a {
+        font-size: 13px;
+    }
+
+    .topbar {
+        padding: 15px;
+        flex-wrap: wrap;
+    }
+
+    .bienvenida {
+        padding: 22px 16px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .estadisticas {
+        padding: 10px 16px 20px;
+        gap: 10px;
+    }
+
+    .stat {
+        padding: 14px 10px;
+        gap: 8px;
+    }
+
+    .stat > span {
+        font-size: 24px;
+    }
+
+    .stat strong {
+        font-size: 21px;
+    }
+
+    .stat small {
+        font-size: 11px;
+    }
+
+    .tabla-seccion {
+        margin: 0 12px 20px;
+        padding: 14px;
+    }
+
+    .tabla-titulo {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    #buscarAccion {
+        width: 100%;
+    }
+
+    .login-page {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .login-ilustracion {
+        padding: 10px;
+    }
+
+    .planeta {
+        font-size: 65px;
+    }
+
+    .login-ilustracion h1 {
+        font-size: 34px;
+    }
+
+    .login-card,
+    .formulario-card {
+        padding: 22px;
+    }
+}

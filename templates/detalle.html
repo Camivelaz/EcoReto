@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block titulo %}Detalles de la acción | Misión Eco-Reto{% endblock %}
+
+{% block contenido %}
+<div class="formulario-contenedor">
+    <div class="formulario-card detalle-card">
+        <span class="icono-grande">🌿</span>
+        <h1>Detalles de la acción</h1>
+
+        <div class="detalle-dato">
+            <span>Tipo de acción</span>
+            <strong>{{ accion.tipo }}</strong>
+        </div>
+
+        <div class="detalle-dato">
+            <span>Descripción</span>
+            <strong>{{ accion.descripcion }}</strong>
+        </div>
+
+        <div class="detalle-dato">
+            <span>Fecha</span>
+            <strong>{{ accion.fecha }}</strong>
+        </div>
+
+        <div class="detalle-dato">
+            <span>Impacto registrado</span>
+            <strong>{{ accion.impacto }} {{ accion.unidad }}</strong>
+        </div>
+
+        <div class="form-botones">
+            <a class="boton editar"
+               href="{{ url_for('rutas.editar', id=accion.id) }}">Editar</a>
+            <a class="boton cancelar"
+               href="{{ url_for('rutas.inicio') }}">Volver al inicio</a>
+        </div>
+
+        <p class="nota">Cada acción cuenta para cuidar nuestro planeta.</p>
+    </div>
+</div>
+{% endblock %}

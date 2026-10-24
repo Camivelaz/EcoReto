@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% if session.get('usuario_id') %}
+    {% set titulo_pagina = "Inicio" %}
+{% else %}
+    {% set titulo_pagina = "Iniciar sesión" %}
+{% endif %}
+
+{% block titulo %}{{ titulo_pagina }} | Misión Eco-Reto{% endblock %}
+
+{% block acceso %}
+<div class="login-page">
+    <div class="login-ilustracion">
+        <div class="planeta">🌎</div>
+        <h1>Misión<br>Eco-Reto</h1>
+        <p>Pequeñas acciones, grandes cambios</p>
+        <div class="naturaleza">🌱 ♻️ 🌿</div>
+    </div>
+
+    <div class="login-card">
+        {% if request.args.get('registro') == '1' %}
+            <h2>Crear cuenta</h2>
+            <p>Únete a Misión Eco-Reto.</p>
+            <form action="{{ url_for('rutas.registro') }}" method="POST">
+                <label>Nombre de usuario</label>
+                <input type="text" name="usuario" minlength="3"
+                       maxlength="40" required placeholder="Crea tu usuario">
+
+                <label>Contraseña</label>
+                <input type="password" name="contrasena" minlength="6"
+                       required placeholder="Mínimo 6 caracteres">
+
+                <button class="boton principal ancho" type="submit">
+                    Crear cuenta
+                </button>
+            </form>
+            <p>¿Ya tienes cuenta?
+                <a href="{{ url_for('rutas.inicio') }}">Inicia sesión</a>
+            </p>
+        {% else %}
+            <h2>Iniciar sesión</h2>
+            <p>Registra tus acciones ecológicas.</p>
+            <form method="POST" action="{{ url_for('rutas.inicio') }}">
+                <label>Usuario</label>
+                <input type="text" name="usuario" required
+                       placeholder="Tu usuario">
+
+                <label>Contraseña</label>
+                <input type="password" name="contrasena" required
+                       placeholder="Tu contraseña">
+
+                <button class="boton principal ancho" type="submit">
+                    Entrar
+                </button>
+            </form>
+            <p>¿No tienes cuenta?
+                <a href="{{ url_for('rutas.inicio', registro=1) }}">Regístrate</a>
+            </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block contenido %}
+<section class="bienvenida">
+    <div>
+        <h1>¡Bienvenido a Misión Eco-Reto!</h1>
+        <p>Registra, consulta y comparte las acciones que ayudan al planeta.</p>
+    </div>
+    <a class="boton principal" href="{{ url_for('rutas.nueva') }}">
+        + Nueva acción
+    </a>
+</section>
+
+<section class="estadisticas" id="estadisticas">
+    <div class="stat verde">
+        <span>🌿</span>
+        <div><strong>{{ total }}</strong><small>Acciones registradas</small></div>
+    </div>
+    <div class="stat azul">
+        <span>💧</span>
+        <div><strong>{{ "%.1f"|format(litros) }}</strong><small>Litros de agua ahorrados*</small></div>
+    </div>
+    <div class="stat amarillo">
+        <span>♻️</span>
+        <div><strong>{{ "%.1f"|format(kilos) }}</strong><small>Kg registrados*</small></div>
+    </div>
+    <div class="stat rosa">
+        <span>⚡</span>
+        <div><strong>{{ "%.1f"|format(kwh) }}</strong><small>kWh registrados*</small></div>
+    </div>
+</section>
+
+<section class="tabla-seccion" id="acciones">
+    <div class="tabla-titulo">
+        <h2>Mis acciones registradas</h2>
+        <input type="search" id="buscarAccion"
+               placeholder="Buscar acción...">
+    </div>
+
+    <div class="tabla-contenedor">
+        <table id="tablaAcciones">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                    <th>Descripción</th>
+                    <th>Impacto</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for accion in acciones %}
+                <tr>
+                    <td>{{ accion.id }}</td>
+                    <td>{{ accion.fecha }}</td>
+                    <td><span class="etiqueta">{{ accion.tipo }}</span></td>
+                    <td>{{ accion.descripcion }}</td>
+                    <td>{{ accion.impacto }} {{ accion.unidad }}</td>
+                    <td class="botones-tabla">
+                        <a class="boton editar"
+                           href="{{ url_for('rutas.editar', id=accion.id) }}">Editar</a>
+                        <a class="boton ver"
+                           href="{{ url_for('rutas.detalle', id=accion.id) }}">Ver</a>
+                        <form method="POST"
+                              action="{{ url_for('rutas.eliminar', id=accion.id) }}"
+                              class="form-eliminar">
+                            <button class="boton eliminar" type="submit"
+                                    data-confirmar="¿Seguro que quieres eliminar esta acción?">
+                                Eliminar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="vacio">
+                        Aún no tienes acciones registradas. ¡Agrega la primera!
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <p class="nota">*Los valores muestran la suma de los impactos registrados por cada unidad. No representan una medición automática del impacto ambiental.</p>
+</section>
+{% endblock %}

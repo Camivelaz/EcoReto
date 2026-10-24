@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% if accion %}
+    {% set encabezado = "Editar acción" %}
+{% else %}
+    {% set encabezado = "Nueva acción ecológica" %}
+{% endif %}
+
+{% block titulo %}{{ encabezado }} | Misión Eco-Reto{% endblock %}
+
+{% block contenido %}
+<div class="formulario-contenedor">
+    <div class="formulario-card">
+        <div class="formulario-encabezado">
+            <span class="icono-grande">🌿</span>
+            <div>
+                <h1>{{ encabezado }}</h1>
+                <p>Registra una acción que ayude al planeta.</p>
+            </div>
+        </div>
+
+        <form method="POST"
+              action="{% if accion %}{{ url_for('rutas.editar', id=accion.id) }}{% else %}{{ url_for('rutas.nueva') }}{% endif %}"
+              id="formAccion">
+
+            <label for="tipo">Tipo de acción</label>
+            <select id="tipo" name="tipo" required>
+                {% for tipo in ["Reciclaje", "Ahorro de agua", "Transporte", "Energía", "Otro"] %}
+                <option value="{{ tipo }}"
+                    {% if accion and accion.tipo == tipo %}selected{% endif %}>
+                    {{ tipo }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion"
+                      maxlength="250" required
+                      placeholder="Escribe qué hiciste...">{{ accion.descripcion if accion else "" }}</textarea>
+
+            <label for="fecha">Fecha</label>
+            <input id="fecha" type="date" name="fecha"
+                   value="{{ accion.fecha if accion else hoy }}" required>
+
+            <label for="impacto">Impacto (cantidad)</label>
+            <input id="impacto" type="number" name="impacto"
+                   min="0" max="1000000" step="any"
+                   value="{{ accion.impacto if accion else '' }}"
+                   placeholder="Ej. 5, 50 o 2" required>
+
+            <label for="unidad">Unidad de medida</label>
+            <select id="unidad" name="unidad" required>
+                {% for unidad in ["kg", "litros", "kWh", "unidades"] %}
+                <option value="{{ unidad }}"
+                    {% if accion and accion.unidad == unidad %}selected{% endif %}>
+                    {{ unidad }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <div class="form-botones">
+                <button class="boton principal" type="submit">
+                    {{ "Actualizar" if accion else "Guardar acción" }}
+                </button>
+                <a class="boton cancelar"
+                   href="{{ url_for('rutas.inicio') }}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
