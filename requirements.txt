@@ -1,5 +1,5 @@
-Flask==3.1.3
-Flask-SQLAlchemy
+Flask
+Flask-SQLAlchemy==3.1.1
+SQLAlchemy
 psycopg2-binary
 gunicorn
-python-dotenvFlask
